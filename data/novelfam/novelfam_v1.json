@@ -1,0 +1,18 @@
+{
+  "cutoff": "2023-01-01",
+  "created_from": "2024-01-01",
+  "created_to": "2026-09-30",
+  "per_month_unreviewed": 500,
+  "stages": {
+    "candidates": 10127,
+    "sequence_new": 4044,
+    "cluster_new": 189,
+    "no_swissprot_homolog": 78,
+    "final": 64,
+    "final_reviewed": 44
+  },
+  "cluster_status": {
+    "old_uniprot_member": 1729,
+    "checked": 183
+  }
+}

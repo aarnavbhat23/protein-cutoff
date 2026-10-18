@@ -1,0 +1,42 @@
+{
+  "identity<0.50": {
+    "overall": 0.6684306569343066,
+    "GO_molecular_function": 0.7462,
+    "GO_biological_process": 0.6619,
+    "GO_cellular_component": 0.6212,
+    "EC_number": 0.6775,
+    "cofactor": 0.8065,
+    "catalytic_activity": 0.4825,
+    "pathway": 0.6937
+  },
+  "identity<0.70": {
+    "overall": 0.6972627737226277,
+    "GO_molecular_function": 0.7538,
+    "GO_biological_process": 0.7008,
+    "GO_cellular_component": 0.6671,
+    "EC_number": 0.7,
+    "cofactor": 0.8105,
+    "catalytic_activity": 0.5012,
+    "pathway": 0.7562
+  },
+  "identity<0.90": {
+    "overall": 0.7038321167883211,
+    "GO_molecular_function": 0.75,
+    "GO_biological_process": 0.7124,
+    "GO_cellular_component": 0.6786,
+    "EC_number": 0.7075,
+    "cofactor": 0.8118,
+    "catalytic_activity": 0.5125,
+    "pathway": 0.7625
+  },
+  "identity<1.01": {
+    "overall": 0.7065693430656934,
+    "GO_molecular_function": 0.75,
+    "GO_biological_process": 0.7124,
+    "GO_cellular_component": 0.6824,
+    "EC_number": 0.715,
+    "cofactor": 0.8118,
+    "catalytic_activity": 0.5162,
+    "pathway": 0.7662
+  }
+}

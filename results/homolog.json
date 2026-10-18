@@ -1,0 +1,53 @@
+{
+  "swissprot_release": "2024_06",
+  "min_identity": 0.3,
+  "min_query_coverage": 0.5,
+  "tasks": {
+    "GO_molecular_function": {
+      "questions": 195,
+      "accuracy": 0.75,
+      "answered": 0.6666666666666666,
+      "accuracy_when_answered": 1.0
+    },
+    "GO_biological_process": {
+      "questions": 193,
+      "accuracy": 0.7124352331606217,
+      "answered": 0.616580310880829,
+      "accuracy_when_answered": 1.0
+    },
+    "GO_cellular_component": {
+      "questions": 196,
+      "accuracy": 0.6823979591836735,
+      "answered": 0.5867346938775511,
+      "accuracy_when_answered": 0.9869565217391304
+    },
+    "EC_number": {
+      "questions": 200,
+      "accuracy": 0.715,
+      "answered": 0.62,
+      "accuracy_when_answered": 1.0
+    },
+    "cofactor": {
+      "questions": 186,
+      "accuracy": 0.8118279569892473,
+      "answered": 0.7741935483870968,
+      "accuracy_when_answered": 0.9756944444444444
+    },
+    "catalytic_activity": {
+      "questions": 200,
+      "accuracy": 0.51625,
+      "answered": 0.355,
+      "accuracy_when_answered": 1.0
+    },
+    "pathway": {
+      "questions": 200,
+      "accuracy": 0.76625,
+      "answered": 0.715,
+      "accuracy_when_answered": 0.972027972027972
+    }
+  },
+  "overall_accuracy": 0.7065693430656934,
+  "questions": 1370,
+  "proteins_with_identical_sequence_in_sprot_2024_06": 7,
+  "proteins_with_close_hit": 474
+}

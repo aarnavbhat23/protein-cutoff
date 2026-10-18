@@ -1,0 +1,95 @@
+{
+  "questions": 1797,
+  "tiers": {
+    "t1_answer_not_in_own_entry": 1142,
+    "t2_no_relative_answer": 780,
+    "t3_sequence_new": 28,
+    "t4_family_new": 4
+  },
+  "by_task": {
+    "EC_number": {
+      "questions": 200,
+      "t1_answer_not_in_own_entry": 123,
+      "t2_no_relative_answer": 72,
+      "t3_sequence_new": 0,
+      "t4_family_new": 0
+    },
+    "GO_biological_process": {
+      "questions": 193,
+      "t1_answer_not_in_own_entry": 82,
+      "t2_no_relative_answer": 43,
+      "t3_sequence_new": 1,
+      "t4_family_new": 0
+    },
+    "GO_cellular_component": {
+      "questions": 196,
+      "t1_answer_not_in_own_entry": 88,
+      "t2_no_relative_answer": 47,
+      "t3_sequence_new": 3,
+      "t4_family_new": 3
+    },
+    "GO_molecular_function": {
+      "questions": 195,
+      "t1_answer_not_in_own_entry": 46,
+      "t2_no_relative_answer": 22,
+      "t3_sequence_new": 1,
+      "t4_family_new": 0
+    },
+    "active_site": {
+      "questions": 146,
+      "t1_answer_not_in_own_entry": 100,
+      "t2_no_relative_answer": 100,
+      "t3_sequence_new": 6,
+      "t4_family_new": 0
+    },
+    "catalytic_activity": {
+      "questions": 200,
+      "t1_answer_not_in_own_entry": 166,
+      "t2_no_relative_answer": 128,
+      "t3_sequence_new": 4,
+      "t4_family_new": 1
+    },
+    "cofactor": {
+      "questions": 186,
+      "t1_answer_not_in_own_entry": 108,
+      "t2_no_relative_answer": 38,
+      "t3_sequence_new": 0,
+      "t4_family_new": 0
+    },
+    "motif_position": {
+      "questions": 52,
+      "t1_answer_not_in_own_entry": 51,
+      "t2_no_relative_answer": 51,
+      "t3_sequence_new": 0,
+      "t4_family_new": 0
+    },
+    "pathway": {
+      "questions": 200,
+      "t1_answer_not_in_own_entry": 156,
+      "t2_no_relative_answer": 57,
+      "t3_sequence_new": 8,
+      "t4_family_new": 0
+    },
+    "ph": {
+      "questions": 54,
+      "t1_answer_not_in_own_entry": 54,
+      "t2_no_relative_answer": 54,
+      "t3_sequence_new": 1,
+      "t4_family_new": 0
+    },
+    "temperature": {
+      "questions": 41,
+      "t1_answer_not_in_own_entry": 41,
+      "t2_no_relative_answer": 41,
+      "t3_sequence_new": 1,
+      "t4_family_new": 0
+    },
+    "transmembrane": {
+      "questions": 134,
+      "t1_answer_not_in_own_entry": 127,
+      "t2_no_relative_answer": 127,
+      "t3_sequence_new": 3,
+      "t4_family_new": 0
+    }
+  }
+}

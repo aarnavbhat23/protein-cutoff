@@ -1,0 +1,159 @@
+{
+  "per_month_sample": 50,
+  "years": {
+    "2016": {
+      "reviewed": {
+        "n": 500,
+        "median_lag_years": 13.043121149897331,
+        "frac_sequence_older_than_1y": 0.962,
+        "frac_sequence_older_than_5y": 0.916
+      },
+      "unreviewed": {
+        "n": 500,
+        "median_lag_years": 0.7255304585900069,
+        "frac_sequence_older_than_1y": 0.49,
+        "frac_sequence_older_than_5y": 0.424
+      }
+    },
+    "2017": {
+      "reviewed": {
+        "n": 600,
+        "median_lag_years": 14.261464750171116,
+        "frac_sequence_older_than_1y": 0.965,
+        "frac_sequence_older_than_5y": 0.925
+      },
+      "unreviewed": {
+        "n": 600,
+        "median_lag_years": 0.3394934976043806,
+        "frac_sequence_older_than_1y": 0.27166666666666667,
+        "frac_sequence_older_than_5y": 0.18
+      }
+    },
+    "2018": {
+      "reviewed": {
+        "n": 550,
+        "median_lag_years": 13.859000684462696,
+        "frac_sequence_older_than_1y": 0.9654545454545455,
+        "frac_sequence_older_than_5y": 0.8745454545454545
+      },
+      "unreviewed": {
+        "n": 550,
+        "median_lag_years": 0.28199863107460643,
+        "frac_sequence_older_than_1y": 0.36727272727272725,
+        "frac_sequence_older_than_5y": 0.23454545454545456
+      }
+    },
+    "2019": {
+      "reviewed": {
+        "n": 500,
+        "median_lag_years": 13.776865160848734,
+        "frac_sequence_older_than_1y": 0.93,
+        "frac_sequence_older_than_5y": 0.844
+      },
+      "unreviewed": {
+        "n": 500,
+        "median_lag_years": 0.459958932238193,
+        "frac_sequence_older_than_1y": 0.432,
+        "frac_sequence_older_than_5y": 0.37
+      }
+    },
+    "2020": {
+      "reviewed": {
+        "n": 300,
+        "median_lag_years": 16.142368240930868,
+        "frac_sequence_older_than_1y": 0.9433333333333334,
+        "frac_sequence_older_than_5y": 0.88
+      },
+      "unreviewed": {
+        "n": 300,
+        "median_lag_years": 0.5393566050650239,
+        "frac_sequence_older_than_1y": 0.3466666666666667,
+        "frac_sequence_older_than_5y": 0.30333333333333334
+      }
+    },
+    "2021": {
+      "reviewed": {
+        "n": 200,
+        "median_lag_years": 18.102669404517453,
+        "frac_sequence_older_than_1y": 1.0,
+        "frac_sequence_older_than_5y": 0.975
+      },
+      "unreviewed": {
+        "n": 200,
+        "median_lag_years": 0.44353182751540043,
+        "frac_sequence_older_than_1y": 0.275,
+        "frac_sequence_older_than_5y": 0.22
+      }
+    },
+    "2022": {
+      "reviewed": {
+        "n": 250,
+        "median_lag_years": 18.401095140314855,
+        "frac_sequence_older_than_1y": 0.972,
+        "frac_sequence_older_than_5y": 0.924
+      },
+      "unreviewed": {
+        "n": 250,
+        "median_lag_years": 0.6050650239561944,
+        "frac_sequence_older_than_1y": 0.42,
+        "frac_sequence_older_than_5y": 0.392
+      }
+    },
+    "2023": {
+      "reviewed": {
+        "n": 250,
+        "median_lag_years": 19.479808350444902,
+        "frac_sequence_older_than_1y": 0.988,
+        "frac_sequence_older_than_5y": 0.968
+      },
+      "unreviewed": {
+        "n": 250,
+        "median_lag_years": 3.8494182067077345,
+        "frac_sequence_older_than_1y": 0.62,
+        "frac_sequence_older_than_5y": 0.468
+      }
+    },
+    "2024": {
+      "reviewed": {
+        "n": 300,
+        "median_lag_years": 19.54551676933607,
+        "frac_sequence_older_than_1y": 0.9866666666666667,
+        "frac_sequence_older_than_5y": 0.96
+      },
+      "unreviewed": {
+        "n": 300,
+        "median_lag_years": 0.7638603696098563,
+        "frac_sequence_older_than_1y": 0.4033333333333333,
+        "frac_sequence_older_than_5y": 0.3466666666666667
+      }
+    },
+    "2025": {
+      "reviewed": {
+        "n": 150,
+        "median_lag_years": 19.509924709103355,
+        "frac_sequence_older_than_1y": 0.96,
+        "frac_sequence_older_than_5y": 0.9
+      },
+      "unreviewed": {
+        "n": 200,
+        "median_lag_years": 6.776180698151951,
+        "frac_sequence_older_than_1y": 0.58,
+        "frac_sequence_older_than_5y": 0.515
+      }
+    },
+    "2026": {
+      "reviewed": {
+        "n": 149,
+        "median_lag_years": 22.080766598220396,
+        "frac_sequence_older_than_1y": 0.9865771812080537,
+        "frac_sequence_older_than_5y": 0.9328859060402684
+      },
+      "unreviewed": {
+        "n": 100,
+        "median_lag_years": 0.9089664613278576,
+        "frac_sequence_older_than_1y": 0.16,
+        "frac_sequence_older_than_5y": 0.16
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "proteins": 651,
+  "with_pubmed_citations": 650,
+  "all_citations_before_cutoff": 0.9323076923076923,
+  "any_citation_before_cutoff": 0.9738461538461538,
+  "median_newest_citation": "2021/08/01",
+  "median_oldest_citation": "2010/01/14"
+}
