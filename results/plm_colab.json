@@ -1,0 +1,143 @@
+{
+ "benchmark_commit": "8b9710932511f816651fc1a7e8a1bc85c3c77767",
+ "sample_positions": 64,
+ "esm2_training_data": "UniRef 2021_04",
+ "models": {
+  "esm2_t6_8M_UR50D": {
+   "before_esm2": {
+    "n": 541,
+    "median": 12.808,
+    "q25": 10.349,
+    "q75": 14.767
+   },
+   "after_esm2": {
+    "n": 110,
+    "median": 11.549,
+    "q25": 9.692,
+    "q75": 13.968
+   },
+   "novelfam": {
+    "n": 64,
+    "median": 13.838,
+    "q25": 12.314,
+    "q75": 14.932
+   },
+   "median_before_esm2_minus_novelfam": [
+    -1.03,
+    -1.385,
+    -0.145
+   ],
+   "median_after_esm2_minus_novelfam": [
+    -2.29,
+    -2.897,
+    -0.951
+   ],
+   "median_before_esm2_minus_after_esm2": [
+    1.259,
+    0.185,
+    1.983
+   ],
+   "length_adjusted_ratio_before_esm2_vs_novelfam": [
+    0.895,
+    0.846,
+    0.947
+   ],
+   "length_adjusted_ratio_after_esm2_vs_novelfam": [
+    0.863,
+    0.803,
+    0.923
+   ]
+  },
+  "esm2_t12_35M_UR50D": {
+   "before_esm2": {
+    "n": 541,
+    "median": 10.318,
+    "q25": 7.761,
+    "q75": 13.0
+   },
+   "after_esm2": {
+    "n": 110,
+    "median": 8.791,
+    "q25": 7.342,
+    "q75": 11.513
+   },
+   "novelfam": {
+    "n": 64,
+    "median": 11.836,
+    "q25": 10.102,
+    "q75": 14.928
+   },
+   "median_before_esm2_minus_novelfam": [
+    -1.518,
+    -2.624,
+    -0.542
+   ],
+   "median_after_esm2_minus_novelfam": [
+    -3.046,
+    -4.375,
+    -2.025
+   ],
+   "median_before_esm2_minus_after_esm2": [
+    1.527,
+    0.745,
+    2.392
+   ],
+   "length_adjusted_ratio_before_esm2_vs_novelfam": [
+    0.819,
+    0.758,
+    0.884
+   ],
+   "length_adjusted_ratio_after_esm2_vs_novelfam": [
+    0.751,
+    0.682,
+    0.821
+   ]
+  },
+  "esm2_t30_150M_UR50D": {
+   "before_esm2": {
+    "n": 541,
+    "median": 7.76,
+    "q25": 5.781,
+    "q75": 10.821
+   },
+   "after_esm2": {
+    "n": 110,
+    "median": 6.63,
+    "q25": 5.533,
+    "q75": 8.497
+   },
+   "novelfam": {
+    "n": 64,
+    "median": 10.276,
+    "q25": 8.986,
+    "q75": 13.981
+   },
+   "median_before_esm2_minus_novelfam": [
+    -2.516,
+    -3.964,
+    -1.596
+   ],
+   "median_after_esm2_minus_novelfam": [
+    -3.646,
+    -5.006,
+    -2.591
+   ],
+   "median_before_esm2_minus_after_esm2": [
+    1.13,
+    0.359,
+    1.718
+   ],
+   "length_adjusted_ratio_before_esm2_vs_novelfam": [
+    0.746,
+    0.678,
+    0.816
+   ],
+   "length_adjusted_ratio_after_esm2_vs_novelfam": [
+    0.661,
+    0.591,
+    0.736
+   ]
+  }
+ },
+ "run": "Google Colab, Tesla T4, notebooks/esm2_colab_standalone.py, 2026-10-19"
+}

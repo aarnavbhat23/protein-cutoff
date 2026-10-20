@@ -39,7 +39,22 @@ Annotation transfer from homologs is a legitimate method, not cheating. The poin
 
 **It is not specific to this benchmark.** In samples of Swiss-Prot entries created in each year from 2016 to 2026, 93–100% have sequences more than a year older than their creation date. The median gap has grown from 13 years (2016) to 22 years (2026). Any "created after" filter on reviewed UniProt entries inherits this.
 
-**Not yet measured: whether this changes protein-LM scores.** ESM-2 was trained on UniRef 2021_04, and 83.1% of the benchmark's sequences were first seen before then. `notebooks/plm_colab.ipynb` compares ESM-2 pseudo-perplexity for benchmark proteins first seen before vs after April 2021, and for the NovelFam set of genuinely new proteins (`data/novelfam/`). It is not run here: it needs a GPU, and the laptop used for this audit stalled on it. No result is claimed.
+![ESM-2 by sequence age](results/figures/esm2_by_age.png)
+
+**Protein language models find these proteins familiar, and more so as they grow.** ESM-2 was trained on UniRef 2021_04. We estimate its pseudo-perplexity from 64 masked positions per protein for every benchmark protein and for the 64 NovelFam proteins (new sequence and new 50% family, no Swiss-Prot relative; `data/novelfam/`). This ran on a Colab T4 using `notebooks/esm2_colab_standalone.py`.
+
+| ESM-2 | first seen before Apr 2021 (n=541) | after (n=110) | NovelFam (n=64) | length-adjusted ratio vs NovelFam: before / after |
+|---|---:|---:|---:|---:|
+| 8M | 12.81 | 11.55 | 13.84 | 0.90 [0.85, 0.95] / 0.86 [0.80, 0.92] |
+| 35M | 10.32 | 8.79 | 11.84 | 0.82 [0.76, 0.88] / 0.75 [0.68, 0.82] |
+| 150M | 7.76 | 6.63 | 10.28 | **0.75** [0.68, 0.82] / **0.66** [0.59, 0.74] |
+
+Medians; ratios from a log-linear fit on length with 95% bootstrap intervals. Two observations:
+
+- Benchmark proteins are 10–34% easier for ESM-2 than genuinely new families, and the gap widens with model size.
+- Whether ESM-2 saw the *exact* sequence does not matter: proteins first seen after its training data are slightly *easier* (median difference +1.1 to +1.5, all intervals above zero).
+
+What makes them predictable is that their families were known, which matches the 92.9% with pre-cutoff relatives. Caveat: NovelFam is dominated by short venom peptides and other unusual proteins, so protein type, not only novelty, may explain part of its higher perplexity.
 
 ## A cleaner subset
 
@@ -102,7 +117,7 @@ python -m cutoffaudit.survey           # -> results/survey.json
 ./scripts/fetch_sprot_2024_06.sh       # ~1.7 GB download, keeps uniprot_sprot.dat.gz (680 MB)
 python -m cutoffaudit.homolog all      # index, MMseqs2 search, score, sensitivity
 python -m cutoffaudit.subset
-python -m cutoffaudit.plm              # optional; on a GPU (notebooks/plm_colab.ipynb)
+# ESM-2 check: run notebooks/esm2_colab_standalone.ipynb on a Colab GPU (self-contained; ~45 min on a T4)
 python -m cutoffaudit.report           # figures + results/summary.md
 ```
 

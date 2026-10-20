@@ -138,6 +138,32 @@ def fig_survey(survey):
     plt.close(fig)
 
 
+AQUA = "#1baf7a"
+PLM_GROUPS = [("before_esm2", BLUE, "benchmark, first seen before ESM-2 data (Apr 2021)"),
+              ("after_esm2", ORANGE, "benchmark, first seen after"),
+              ("novelfam", AQUA, "NovelFam: new sequence and new family")]
+
+
+def fig_plm(plm):
+    models = list(plm["models"])
+    fig, ax = plt.subplots(figsize=(8, 3.6))
+    for i, m in enumerate(models):
+        for j, (g, col, lab) in enumerate(PLM_GROUPS):
+            v = plm["models"][m][g]
+            x = i + (j - 1) * 0.22
+            ax.plot([x, x], [v["q25"], v["q75"]], color=col, lw=2, alpha=0.6)
+            ax.scatter(x, v["median"], s=50, color=col, zorder=3, label=lab if i == 0 else None,
+                       marker="D" if g == "novelfam" else "o")
+    ax.set_xticks(range(len(models)), [m.replace("_UR50D", "").replace("esm2_", "ESM-2 ") for m in models])
+    ax.set_ylabel("pseudo-perplexity (median, IQR)")
+    ax.set_title("ESM-2: benchmark proteins look familiar; genuinely new families do not")
+    ax.legend(fontsize=8, loc="upper center", bbox_to_anchor=(0.5, -0.16), ncol=1)
+    ax.grid(axis="x", visible=False)
+    fig.tight_layout()
+    fig.savefig(FIG / "esm2_by_age.png", dpi=160)
+    plt.close(fig)
+
+
 def md_table(rows, header):
     return ("| " + " | ".join(header) + " |\n|" + "---|" * len(header) + "\n" +
             "".join("| " + " | ".join(map(str, r)) + " |\n" for r in rows))
@@ -185,7 +211,7 @@ def main():
     if lit:
         lines.append("\n## Literature cited in the current entries\n")
         lines.append(md_table([[k, f"{v:.1%}" if isinstance(v, float) else v] for k, v in lit.items()], ["measure", "value"]))
-    for name in sorted(p.name for p in RES.glob("plm_*.json")):
+    for name in sorted(p.name for p in RES.glob("plm_esm2*.json")):
         p = load(name)
         lines.append(f"\n## {p['model']}: pseudo-perplexity by sequence age\n")
         lines.append(md_table([[g, v["n"], f"{v['median']:.2f}", f"[{v['q25']:.2f}, {v['q75']:.2f}]"] for g, v in p["groups"].items()],
@@ -193,6 +219,19 @@ def main():
         for k in ("median_diff_before_minus_novelfam_ci95", "median_diff_before_minus_after_ci95"):
             if k in p:
                 lines.append(f"\n{k}: [{p[k][0]:.2f}, {p[k][1]:.2f}]\n")
+    plm = load("plm_colab.json")
+    if plm:
+        fig_plm(plm)
+        lines.append(f"\n## ESM-2 pseudo-perplexity by sequence age ({plm['run']})\n")
+        rows = []
+        for m, r in plm["models"].items():
+            rows.append([m] + [f"{r[g]['median']:.2f} (n={r[g]['n']})" for g, _, _ in PLM_GROUPS] +
+                        [f"{r['length_adjusted_ratio_before_esm2_vs_novelfam'][0]:.3f} [{r['length_adjusted_ratio_before_esm2_vs_novelfam'][1]:.3f}, {r['length_adjusted_ratio_before_esm2_vs_novelfam'][2]:.3f}]",
+                         f"{r['length_adjusted_ratio_after_esm2_vs_novelfam'][0]:.3f} [{r['length_adjusted_ratio_after_esm2_vs_novelfam'][1]:.3f}, {r['length_adjusted_ratio_after_esm2_vs_novelfam'][2]:.3f}]",
+                         f"{r['median_before_esm2_minus_after_esm2'][0]:+.2f} [{r['median_before_esm2_minus_after_esm2'][1]:+.2f}, {r['median_before_esm2_minus_after_esm2'][2]:+.2f}]"])
+        lines.append(md_table(rows, ["model", "before ESM-2 data", "after", "NovelFam",
+                                     "length-adj. ratio before/NovelFam", "length-adj. ratio after/NovelFam",
+                                     "median before - after"]))
     (RES / "summary.md").write_text("\n".join(lines))
     print("\n".join(lines))
 

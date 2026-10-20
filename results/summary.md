@@ -79,3 +79,12 @@ All questions: leaked 36.1%; own-entry lookup accuracy 52.1%; calibration on cur
 | any_citation_before_cutoff | 97.4% |
 | median_newest_citation | 2021/08/01 |
 | median_oldest_citation | 2010/01/14 |
+
+
+## ESM-2 pseudo-perplexity by sequence age (Google Colab, Tesla T4, notebooks/esm2_colab_standalone.py, 2026-10-19)
+
+| model | before ESM-2 data | after | NovelFam | length-adj. ratio before/NovelFam | length-adj. ratio after/NovelFam | median before - after |
+|---|---|---|---|---|---|---|
+| esm2_t6_8M_UR50D | 12.81 (n=541) | 11.55 (n=110) | 13.84 (n=64) | 0.895 [0.846, 0.947] | 0.863 [0.803, 0.923] | +1.26 [+0.18, +1.98] |
+| esm2_t12_35M_UR50D | 10.32 (n=541) | 8.79 (n=110) | 11.84 (n=64) | 0.819 [0.758, 0.884] | 0.751 [0.682, 0.821] | +1.53 [+0.74, +2.39] |
+| esm2_t30_150M_UR50D | 7.76 (n=541) | 6.63 (n=110) | 10.28 (n=64) | 0.746 [0.678, 0.816] | 0.661 [0.591, 0.736] | +1.13 [+0.36, +1.72] |
