@@ -1,0 +1,26 @@
+{
+  "liveproteinbench": {
+    "cutoff": "2025-01-01",
+    "entries": 2743,
+    "dated": 2700,
+    "sequence_first_seen_before_cutoff": 0.9392592592592592,
+    "sequence_first_seen_more_than_1y_before": 0.9266666666666666,
+    "sequence_first_seen_before_2021_04": 0.8603703703703703,
+    "median_first_seen": "2010-05-31",
+    "new_sequences": 164,
+    "cluster_sample": 559,
+    "cluster_has_member_before_cutoff": 0.9033989266547406
+  },
+  "vibeproteinbench": {
+    "cutoff": "2025-09-01",
+    "entries": 1834,
+    "dated": 1791,
+    "sequence_first_seen_before_cutoff": 0.9564489112227805,
+    "sequence_first_seen_more_than_1y_before": 0.9463986599664992,
+    "sequence_first_seen_before_2021_04": 0.8782802903405919,
+    "median_first_seen": "2010-04-07",
+    "new_sequences": 78,
+    "cluster_sample": 526,
+    "cluster_has_member_before_cutoff": 0.9163498098859315
+  }
+}

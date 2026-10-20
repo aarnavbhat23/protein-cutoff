@@ -4,7 +4,18 @@
 
 Temporal cutoffs are becoming the standard defence against contamination in scientific benchmarks: evaluate only on data "released after" a model's training date. For proteins, the date that gets used is UniProt's `date created`. **That date says when an entry was curated, not when the protein became known.**
 
-This repository measures what that does to a benchmark built on it. [LiveProteinBench](https://arxiv.org/abs/2512.22257) describes itself as contamination-free because every protein was "first publicly released after January 1, 2025". We audit all **1,797 questions on 651 proteins**, pinned to commit [`8b97109`](https://github.com/Rongdingyi/LiveProteinBench/tree/8b9710932511f816651fc1a7e8a1bc85c3c77767), against UniProt's own archives.
+This repository measures what that does, at three levels:
+
+1. **The rules.** For the two published protein benchmarks that select by UniProt date, we rebuild each rule's full candidate pool and date every sequence.
+2. **One benchmark in full.** [LiveProteinBench](https://arxiv.org/abs/2512.22257) describes itself as contamination-free because every protein was "first publicly released after January 1, 2025". We audit all **1,797 questions on 651 proteins**, pinned to commit [`8b97109`](https://github.com/Rongdingyi/LiveProteinBench/tree/8b9710932511f816651fc1a7e8a1bc85c3c77767), against UniProt's own archives.
+3. **The models.** We test whether protein language models treat "post-cutoff" proteins as new.
+
+**Date-based selection rules mostly select old proteins.** Reviewed UniProtKB entries (50–1,022 aa) with `date_created` on or after the cutoff:
+
+| Rule | Entries | Sequence first seen before cutoff | More than 1 year before | Median first seen | UniRef50 cluster has a pre-cutoff member (sample) |
+|---|---:|---:|---:|---:|---:|
+| created ≥ 2025-01-01 ([LiveProteinBench](https://arxiv.org/abs/2512.22257)) | 2,743 | **93.9%** | 92.7% | May 2010 | 90.3% (n=559) |
+| created ≥ 2025-09-01 ([VibeProteinBench](https://arxiv.org/abs/2605.10978), "registered after September 1, 2025"; data not released) | 1,834 | **95.6%** | 94.6% | Apr 2010 | 91.6% (n=526) |
 
 ![When the benchmark's proteins were first seen](results/figures/first_seen.png)
 
@@ -56,6 +67,16 @@ Medians; ratios from a log-linear fit on length with 95% bootstrap intervals. Tw
 
 What makes them predictable is that their families were known, which matches the 92.9% with pre-cutoff relatives. Caveat: NovelFam is dominated by short venom peptides and other unusual proteins, so protein type, not only novelty, may explain part of its higher perplexity.
 
+**A matched test removes the protein-type confound.** From the same 2024–26 UniProt additions we take proteins whose sequence was first seen on or after 2023-01-01, so none can be in ESM-2's data. We split them by whether their UniRef50 family is new (n=157) or old (n=314, matched 2:1 on length and review status; `data/matched_family_novelty.tsv`, `notebooks/esm2_colab_matched.py`):
+
+| ESM-2 | new family | old family | length-adjusted ratio old / new |
+|---|---:|---:|---:|
+| 8M | 13.64 | 12.56 | 0.93 [0.89, 0.98] |
+| 35M | 10.88 | 9.28 | 0.89 [0.84, 0.95] |
+| 150M | 9.11 | 7.06 | **0.81** [0.76, 0.87] |
+
+Sequences never seen by ESM-2 are still up to 19% easier when their family was known, and the effect grows with model size. Homology-driven likelihood in protein LMs is known ([Gordon et al., ICLR 2025](https://proceedings.iclr.cc/paper_files/paper/2025/file/62cf81a87f367758cebabce08e8d40d8-Paper-Conference.pdf)). What this adds is the evaluation consequence: **a cutoff on sequence dates does little to control what a protein LM finds familiar; a family-level (cluster) cutoff is what matters.**
+
 ## A cleaner subset
 
 `results/clean_subset.tsv` flags every question (by id) through four nested filters:
@@ -94,6 +115,7 @@ printf "Q8MVC4\nP0DXN9\n" | python -m cutoffaudit.seqdate --cutoff 2025-01-01 -
 
 - This shows that the information **was public** before the cutoff. It cannot show that any particular model **was trained on** it; model training sets are not disclosed.
 - The matchers are exact. Paraphrased or renamed annotations are missed, so leakage is a lower bound (calibration recall: 69% for GO biological process, 72% for catalytic activity).
+- The matched test's length matching is imperfect (median 260 vs 339 aa); the ratios are length-adjusted. New families are still enriched for small toxins and peptides, so residual protein-type differences remain.
 - The survey samples the first page of each month's results (≤ 50 entries), so the TrEMBL series in particular is noisy.
 - UniParc dates the sequence, not the protein's characterisation. A new sequence can still belong to a well-studied family, which is why the cluster check is reported separately.
 
@@ -103,6 +125,7 @@ printf "Q8MVC4\nP0DXN9\n" | python -m cutoffaudit.seqdate --cutoff 2025-01-01 -
 - **Related concerns:** a [secondary summary](https://www.emergentmind.com/topics/contamination-free-rolling-benchmark) noted that a post-2025 timestamp "does not logically exclude earlier homologous information". Benchmark audits such as the [biomolecular benchmark audit](https://pubs.rsc.org/sc/article/doi/10.1039/d6sc01799a/1285850/Auditing-widely-used-biomolecular-benchmarks) and work on [leakage in protein–ligand benchmarks](https://www.biorxiv.org/content/10.64898/2026.06.29.735309v1) study split contamination.
 
   We found no prior quantitative audit of UniProt-date cutoffs using sequence first-seen dates and entry histories. If one exists, please open an issue.
+- **Protein-LM likelihood and homology:** Gordon, Lu & Abbeel, [ICLR 2025](https://proceedings.iclr.cc/paper_files/paper/2025/file/62cf81a87f367758cebabce08e8d40d8-Paper-Conference.pdf) (influence of homologous training sequences); Ding & Steinhardt, ICLR 2024 (sampling bias across the tree of life). Our ESM-2 results are consistent with and build on these.
 - **Data:** [UniProt](https://www.uniprot.org) (UniProtKB, UniParc, UniRef, UniSave; CC BY 4.0), NCBI PubMed E-utilities, [MMseqs2](https://github.com/soedinglab/MMseqs2).
 
 ## Reproduce
@@ -114,6 +137,7 @@ python -m unittest discover -s tests -v
 python -m cutoffaudit.audit all        # dates + own-entry leakage + calibration  -> results/proteins.tsv, items.tsv, summary.json
 python -m cutoffaudit.literature       # -> results/literature.*
 python -m cutoffaudit.survey           # -> results/survey.json
+python -m cutoffaudit.ruleaudit        # -> results/rules.json (both benchmarks' selection rules)
 ./scripts/fetch_sprot_2024_06.sh       # ~1.7 GB download, keeps uniprot_sprot.dat.gz (680 MB)
 python -m cutoffaudit.homolog all      # index, MMseqs2 search, score, sensitivity
 python -m cutoffaudit.subset
