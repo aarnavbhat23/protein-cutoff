@@ -145,4 +145,4 @@ python -m cutoffaudit.subset
 python -m cutoffaudit.report           # figures + results/summary.md
 ```
 
-Code: MIT. Built with AI assistance. Every number comes from the files in `results/`. There is no independent review or adoption claim.
+Code: MIT. Every number comes from the files in `results/`. There is no independent review or adoption claim.
