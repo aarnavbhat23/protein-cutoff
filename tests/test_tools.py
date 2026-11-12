@@ -2,7 +2,9 @@
 
 import datetime as dt
 import unittest
+from unittest.mock import patch
 
+from cutoffaudit.audit import protein_dates
 from cutoffaudit.homolog import as_entry
 from cutoffaudit.match import supports
 from cutoffaudit.seqdate import verdict
@@ -32,6 +34,19 @@ class TransferTest(unittest.TestCase):
 
 
 class UniSaveDateTest(unittest.TestCase):
+    @patch("cutoffaudit.audit.uniprot.idmap", return_value=[])
+    @patch("cutoffaudit.audit.uniprot.unisave_history")
+    def test_multiple_archived_versions_can_share_a_release_date(self, history, _):
+        history.return_value = [
+            {"firstReleaseDate": "02-Sep-2025", "database": "Swiss-Prot", "sequenceVersion": 2},
+            {"firstReleaseDate": "02-Sep-2025", "database": "Swiss-Prot", "sequenceVersion": 1},
+            {"firstReleaseDate": "01-May-2020", "database": "TrEMBL", "sequenceVersion": 1},
+        ]
+        record = protein_dates(["P12345"])["P12345"]
+        self.assertEqual(record["uniprot_first"], "2020-05-01")
+        self.assertEqual(record["swissprot_first"], "2025-09-02")
+        self.assertEqual(record["current_sequence_since"], "2025-09-02")
+
     def test_release_dates_compare_as_dates_not_strings(self):
         # string comparison would put "02-Sep-2026" before "2025-01-01"
         self.assertGreater(release_date({"firstReleaseDate": "02-Sep-2026"}), dt.date(2025, 1, 1))

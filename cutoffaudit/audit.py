@@ -50,7 +50,7 @@ def protein_dates(accs: list[str], cut: dt.date = CUT) -> dict[str, dict]:
         h = uniprot.unisave_history(acc)
         if not h:
             return acc, {}
-        dates = sorted((uniprot.release_date(e), e) for e in h)
+        dates = sorted(((uniprot.release_date(e), e) for e in h), key=lambda record: record[0])
         sp = [d for d, e in dates if e["database"] == "Swiss-Prot"]
         seqv = sorted({e["sequenceVersion"] for e in h})
         last_seq_change = min((d for d, e in dates if e["sequenceVersion"] == seqv[-1]), default=None)
