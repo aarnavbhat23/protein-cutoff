@@ -2,9 +2,12 @@
 
 [![tests](https://github.com/aarnavbhat23/protein-cutoff-audit/actions/workflows/tests.yml/badge.svg)](https://github.com/aarnavbhat23/protein-cutoff-audit/actions/workflows/tests.yml)
 
-Temporal cutoffs are becoming the standard defence against contamination in scientific benchmarks: evaluate only on data "released after" a model's training date. For proteins, the date that gets used is UniProt's `date created`. **That date says when an entry was curated, not when the protein became known.**
+Of the 651 proteins in LiveProteinBench, **95.4%** had sequences in a
+public archive before the benchmark's cutoff. The benchmark used the
+Swiss-Prot curation date, which can come years after the sequence first
+appears in UniParc.
 
-This repository measures what that does, at three levels:
+The audit covers three parts of the benchmark:
 
 1. **The rules.** For the two published protein benchmarks that select by UniProt date, we rebuild each rule's full candidate pool and date every sequence.
 2. **One benchmark in full.** [LiveProteinBench](https://arxiv.org/abs/2512.22257) describes itself as contamination-free because every protein was "first publicly released after January 1, 2025". We audit all **1,797 questions on 651 proteins**, pinned to commit [`8b97109`](https://github.com/Rongdingyi/LiveProteinBench/tree/8b9710932511f816651fc1a7e8a1bc85c3c77767), against UniProt's own archives.
@@ -44,7 +47,9 @@ The date that defines the benchmark is when each protein reached Swiss-Prot cura
 
 **Pre-cutoff relatives answer most questions.** A lookup with no learning searches each protein against Swiss-Prot release 2024_06 (27 Nov 2024) with MMseqs2. It picks the option best supported by the annotations of relatives at ≥ 30% identity. It beats the best model in the paper on EC number (71.5% vs 31.0%), pathway (76.6% vs 30.5%) and cofactor (81.2% vs 59.1%). It roughly ties GPT-5 on the GO tasks, and trails it on catalytic activity, where our exact-reaction matching is strict. When a relative supports an option, that option is correct 97–100% of the time.
 
-Annotation transfer from homologs is a legitimate method, not cheating. The point is narrower: **a date cutoff does not make the questions new.** The benchmark largely measures recall of family-level knowledge that predates its cutoff.
+Transferring annotations from homologs is a valid prediction method.
+Here it shows how much family-level knowledge was available before the
+benchmark's cutoff.
 
 ![UniProt-wide](results/figures/survey.png)
 
@@ -67,7 +72,7 @@ Medians; ratios from a log-linear fit on length with 95% bootstrap intervals. Tw
 
 What makes them predictable is that their families were known, which matches the 92.9% with pre-cutoff relatives. Caveat: NovelFam is dominated by short venom peptides and other unusual proteins, so protein type, not only novelty, may explain part of its higher perplexity.
 
-**A matched test removes the protein-type confound.** From the same 2024–26 UniProt additions we take proteins whose sequence was first seen on or after 2023-01-01, so none can be in ESM-2's data. We split them by whether their UniRef50 family is new (n=157) or old (n=314, matched 2:1 on length and review status; `data/matched_family_novelty.tsv`, `notebooks/esm2_colab_matched.py`):
+**A matched test reduces differences in protein type.** From the same 2024–26 UniProt additions we take proteins whose sequence was first seen on or after 2023-01-01, so none can be in ESM-2's data. We split them by whether their UniRef50 family is new (n=157) or old (n=314, matched 2:1 on length and review status; `data/matched_family_novelty.tsv`, `notebooks/esm2_colab_matched.py`):
 
 | ESM-2 | new family | old family | length-adjusted ratio old / new |
 |---|---:|---:|---:|
