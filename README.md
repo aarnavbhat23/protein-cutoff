@@ -3,9 +3,8 @@
 [![tests](https://github.com/aarnavbhat23/protein-cutoff-audit/actions/workflows/tests.yml/badge.svg)](https://github.com/aarnavbhat23/protein-cutoff-audit/actions/workflows/tests.yml)
 
 Of the 651 proteins in LiveProteinBench, **95.4%** had sequences in a
-public archive before the benchmark's cutoff. The benchmark used the
-Swiss-Prot curation date, which can come years after the sequence first
-appears in UniParc.
+public archive before the benchmark's cutoff. The benchmark used the Swiss-Prot curation date. **That date says when an
+entry was curated. The sequence can have been public for years by then.**
 
 The audit covers three parts of the benchmark:
 
