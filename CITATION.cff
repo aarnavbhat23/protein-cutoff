@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+message: "If you use this audit, please cite it as below."
+title: "Protein Cutoff Audit: date-based selection rules in protein benchmarks"
+authors:
+  - family-names: Bhat
+    given-names: Aarnav
+repository-code: "https://github.com/aarnavbhat23/protein-cutoff"
+license: MIT

@@ -1,6 +1,6 @@
-# protein-cutoff-audit
+# protein-cutoff
 
-[![tests](https://github.com/aarnavbhat23/protein-cutoff-audit/actions/workflows/tests.yml/badge.svg)](https://github.com/aarnavbhat23/protein-cutoff-audit/actions/workflows/tests.yml)
+[![tests](https://github.com/aarnavbhat23/protein-cutoff/actions/workflows/tests.yml/badge.svg)](https://github.com/aarnavbhat23/protein-cutoff/actions/workflows/tests.yml)
 
 Of the 651 proteins in LiveProteinBench, **95.4%** had sequences in a
 public archive before the benchmark's cutoff. The benchmark used the Swiss-Prot curation date. **That date says when an
